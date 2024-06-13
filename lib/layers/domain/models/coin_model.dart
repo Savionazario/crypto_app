@@ -10,19 +10,22 @@ class CoinModel {
   double? ask;
   String? timestamp;
   String? createDate;
+  String? iconPath;
 
-  CoinModel(
-      {this.code,
-      this.codein,
-      this.name,
-      this.high,
-      this.low,
-      this.varBid,
-      this.pctChange,
-      this.bid,
-      this.ask,
-      this.timestamp,
-      this.createDate});
+  CoinModel({
+    this.code,
+    this.codein,
+    this.name,
+    this.high,
+    this.low,
+    this.varBid,
+    this.pctChange,
+    this.bid,
+    this.ask,
+    this.timestamp,
+    this.createDate,
+    this.iconPath,
+  });
 
   CoinModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
