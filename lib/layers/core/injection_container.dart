@@ -1,3 +1,5 @@
+import 'package:crypto_app/layers/data/datasources/coin_datasource.dart';
+import 'package:crypto_app/layers/data/datasources/remote/coin_remote_datasource_impl.dart';
 import 'package:crypto_app/layers/data/repositories/coin_repository_impl.dart';
 import 'package:crypto_app/layers/data/services/icon_service_impl.dart';
 import 'package:crypto_app/layers/domain/repositories/coin_repository.dart';
@@ -14,7 +16,15 @@ class InjectionContainer {
 
     getIt.registerLazySingleton<Dio>(
       () => Dio(),
-    ); 
+    );
+
+    //! Datasources
+    getIt.registerLazySingleton<CoinDatasource>(
+      () => CoinRemoteDatasourceImpl(
+        getIt(),
+        getIt(),
+      ),
+    );
 
     //! Services
     getIt.registerLazySingleton<IconService>(
@@ -23,17 +33,23 @@ class InjectionContainer {
 
     //! Repositories
     getIt.registerLazySingleton<CoinRepository>(
-      () => CoinRepositoryImpl(getIt(), getIt()),
+      () => CoinRepositoryImpl(
+        getIt(),
+      ),
     );
 
     //! Usecases
     getIt.registerLazySingleton<GetAllCoinsUsecase>(
-      () => GetAllCoinsUsecaseImpl(getIt()),
+      () => GetAllCoinsUsecaseImpl(
+        getIt(),
+      ),
     );
 
     //! Cubits
     getIt.registerLazySingleton<AllCoinsCubit>(
-      () => AllCoinsCubit(getIt()),
+      () => AllCoinsCubit(
+        getIt(),
+      ),
     );
   }
 }
